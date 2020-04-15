@@ -160,7 +160,7 @@ public class IdempotentTokenInterceptor implements HandlerInterceptor {
 
 
 
-完成代码参考我的github：https://github.com/huchao1009/idempotent
+完成代码参考我的github：https://github.com/huchao1009/idempotent.git
 
 &nbsp;
 
