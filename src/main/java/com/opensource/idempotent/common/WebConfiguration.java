@@ -1,19 +1,30 @@
 package com.opensource.idempotent.common;
 
 import com.opensource.idempotent.interceptor.IdempotentTokenInterceptor;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Created by double on 2019/7/11.
  */
-@SpringBootConfiguration
-public class TokenInterceptorConfig extends WebMvcConfigurerAdapter {
+@Configuration
+public class WebConfiguration implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        //注册接口幂等性拦截器
+        registry.addInterceptor(apiIdempotentInterceptor());
+    }
+
+    @Bean
+    public IdempotentTokenInterceptor apiIdempotentInterceptor() {
+        return new IdempotentTokenInterceptor();
+    }
 
     /**
      * 跨域
@@ -30,18 +41,6 @@ public class TokenInterceptorConfig extends WebMvcConfigurerAdapter {
         corsConfiguration.addAllowedMethod("*");
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        //注册接口幂等性拦截器
-        registry.addInterceptor(apiIdempotentInterceptor());
-        super.addInterceptors(registry);
-    }
-
-    @Bean
-    public IdempotentTokenInterceptor apiIdempotentInterceptor() {
-        return new IdempotentTokenInterceptor();
     }
 
 }
