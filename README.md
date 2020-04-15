@@ -18,7 +18,7 @@
 - 普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次
   等等
 
-
+&nbsp;
 
 #### 二、常见解决方案
 
@@ -34,7 +34,7 @@
 
 - 状态机 -- 状态变更, 更新数据时判断状态
 
-
+&nbsp;
 
 #### 三、本文实现方案
 
@@ -42,7 +42,7 @@
 
 为需要保证幂等性的每一次请求创建一个唯一标识token, 先获取token, 并将此token存入redis, 请求接口时, 将此token放到header或者作为请求参数请求接口, 后端接口判断redis中是否存在此token，如果存在, 正常处理业务逻辑, 并从redis中删除此token, 那么, 如果是重复请求, 由于token已被删除, 则不能通过校验, 返回请勿重复操作提示，如果不存在, 说明参数不合法或者是重复请求, 返回提示即可
 
-
+&nbsp;
 
 #### 四、核心代码
 
@@ -162,7 +162,7 @@ public class IdempotentTokenInterceptor implements HandlerInterceptor {
 
 完成代码参考我的github：https://github.com/huchao1009/idempotent
 
-
+&nbsp;
 
 #### 五、测试
 
@@ -189,7 +189,7 @@ public class TestController {
 }
 ```
 
-
+&nbsp;
 
 ##### 1、获取token
 
