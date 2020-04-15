@@ -1,6 +1,6 @@
 ### 接口幂等性校验
 
-
+&nbsp;
 
 #### 一、概念
 
@@ -160,7 +160,7 @@ public class IdempotentTokenInterceptor implements HandlerInterceptor {
 
 
 
-完成代码参考我的github：https://github.com/huchao1009/idempotent.git
+完成代码参考我的github：[https://github.com/huchao1009/idempotent.git](https://github.com/huchao1009/idempotent.git)
 
 &nbsp;
 
