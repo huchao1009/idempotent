@@ -18,11 +18,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册接口幂等性拦截器
-        registry.addInterceptor(apiIdempotentInterceptor());
+        registry.addInterceptor(idempotentTokenInterceptor());
     }
 
     @Bean
-    public IdempotentTokenInterceptor apiIdempotentInterceptor() {
+    public IdempotentTokenInterceptor idempotentTokenInterceptor() {
         return new IdempotentTokenInterceptor();
     }
 
